@@ -1,0 +1,117 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dip Tracker</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <main>
+        <div class="py-5 text-center">
+          <h1>#BuyTheDip</h1>
+          <p class="lead">
+            Set up trackers on alarms on multiple cryptocurrencies, so that you
+            don't miss out on the next dip.
+          </p>
+        </div>
+
+        <div class="row g-5">
+          <div class="col-md-5 col-lg-4 order-md-last">
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+              <span class="text-primary">Your Trackers</span>
+              <span
+                class="badge bg-primary rounded-pill"
+                id="trackerCount"
+              ></span>
+            </h4>
+            <ul id="tracker-list" class="list-group mb-3"></ul>
+          </div>
+
+          <div class="col-md-7 col-lg-8">
+            <h4 class="mb-3">Add a tracker</h4>
+            <form class="needs-validation" novalidate>
+              <div class="row g-3 mb-4">
+                <div class="col-sm-6">
+                  <label for="coin" class="form-label">Country</label>
+                  <select class="form-select input-group-lg" id="coin" required>
+                    <!-- <option value="btc">Bitcoin</option>
+                    <option value="doge">Dogecoin</option>
+                    <option value="btc-cash">Bitcoin- CAsh</option>
+                    <option value="eth">Ethereum</option>
+                    <option value="shi">Shibu coin</option> -->
+                  </select>
+                  <div class="invalid-feedback">
+                    Please select a valid CryptoCurrency.
+                  </div>
+                </div>
+                <div class="col-sm-6 my-md-3">
+                  <label for="currency" class="form-label"
+                    >Currency (eg. INR, USD...)</label
+                  >
+                  <select class="form-select" id="currency" required>
+                    <!-- <option value="npl">NPl</option>
+                    <option value="usd">USD</option>
+                    <option value="inr">INR</option>
+                    <option value="eur">EURO</option> -->
+                  </select>
+                  <div class="invalid-feedback">
+                    Please select a valid currency.
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <label for="timer" class="form-label"
+                    >Set Interval time in minutes</label
+                  >
+                  <input
+                    type="number"
+                    id="timer"
+                    class="form-control"
+                    value="1"
+                  />
+                </div>
+              </div>
+
+              <div class="row g-3 mb-4">
+                <div class="col-sm-6">
+                  <label for="minCoin" class="form-label"
+                    >Minimum value Alert</label
+                  >
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="minCoin"
+                    value="0"
+                  />
+                </div>
+                <div class="col-sm-6">
+                  <label for="maxCoin" class="form-label"
+                    >Maximum value Alert</label
+                  >
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="maxCoin"
+                    value="1000000000000000"
+                  />
+                </div>
+              </div>
+
+              <button type="submit" id="submitButton" class="btn btn-primary">
+                Add
+              </button>
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script src="./options.js"></script>
+  </body>
+</html>
