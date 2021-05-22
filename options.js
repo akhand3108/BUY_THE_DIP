@@ -7,22 +7,27 @@ const timerInput = document.getElementById("timer")
 
 submitButton.onclick = (e) => {
   e.preventDefault()
-  const listObject = {
-    coinID: coinSelect.value,
-    currency: currencySelect.value,
-    timer: timerInput.value,
-    min: minInput.value,
-    max: maxInput.value,
-  }
-  if (!trackers[coinSelect.value]) {
-    trackers[coinSelect.value] = listObject
-    // setStorage(trackers)
-    chrome.storage.local.set({ trackers })
-  }
 
-  // console.log(trackers)
-  submitButton.parentElement.reset()
-  renderList(trackers)
+  if (coinSelect.value !== "none" && timerInput.value >= 1) {
+    const listObject = {
+      coinID: coinSelect.value,
+      currency: currencySelect.value,
+      timer: timerInput.value,
+      min: minInput.value,
+      max: maxInput.value,
+    }
+    if (!trackers[coinSelect.value]) {
+      trackers[coinSelect.value] = listObject
+      // setStorage(trackers)
+      chrome.storage.local.set({ trackers })
+    }
+
+    // console.log(trackers)
+    submitButton.parentElement.reset()
+    renderList(trackers)
+  } else {
+    alert("Please provide correct input")
+  }
 }
 
 renderList = (coinList = {}) => {
@@ -105,6 +110,14 @@ startTrackers = () => {
   })
 }
 
+coinSelect.onchange = () => {
+  if (coinSelect.value === "none") {
+    currencySelect.disabled = true
+  } else {
+    currencySelect.disabled = false
+  }
+}
+
 let trackers = {}
 chrome.storage.local.get(
   ["trackers", "coinMap", "currencyList"],
@@ -113,5 +126,6 @@ chrome.storage.local.get(
     saveToGlobal(trackers)
     renderCurrencySelect(currencyList)
     renderList(trackers)
+    currencySelect.disabled = true
   }
 )
