@@ -51,12 +51,17 @@
                   <label for="currency" class="form-label"
                     >Currency (eg. INR, USD...)</label
                   >
-                  <select class="form-select" id="currency" required></select>
+                  <select class="form-select" id="currency" required>
+                    <option value="none">Choose.....</option>
+                  </select>
                   <div class="invalid-feedback">
                     Please select a valid currency.
                   </div>
                 </div>
-
+                <div class="col-sm-6">
+                  <div class="text-small">Current price is</div>
+                  <h2 class="text-success" id="price-shower"></h3>
+                </div>
                 <div class="col-sm-6">
                   <label for="timer" class="form-label"
                     >Set Interval time in minutes</label

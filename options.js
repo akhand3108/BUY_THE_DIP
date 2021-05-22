@@ -4,11 +4,18 @@ const currencySelect = document.getElementById("currency")
 const minInput = document.getElementById("minCoin")
 const maxInput = document.getElementById("maxCoin")
 const timerInput = document.getElementById("timer")
+const priceShower = document.getElementById("price-shower")
 
 submitButton.onclick = (e) => {
   e.preventDefault()
 
-  if (coinSelect.value !== "none" && timerInput.value >= 1) {
+  if (
+    coinSelect.value !== "none" &&
+    currencySelect.value !== "none" &&
+    timerInput.value >= 1 &&
+    minInput.value >= 0 &&
+    maxInput.value >= minInput.value
+  ) {
     const listObject = {
       coinID: coinSelect.value,
       currency: currencySelect.value,
@@ -116,6 +123,22 @@ coinSelect.onchange = () => {
   } else {
     currencySelect.disabled = false
   }
+}
+
+currencySelect.onchange = async () => {
+  priceShower.innerText = "Loading..."
+  let price = await fetchPrice(coinSelect.value, currencySelect.value)
+  console.log(price)
+  priceShower.innerText = price
+}
+
+fetchPrice = async (id, currency) => {
+  const response = await fetch(
+    `https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=${currency}`
+  )
+  const data = await response.json()
+  console.log(data)
+  return data[id][currency]
 }
 
 let trackers = {}
