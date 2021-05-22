@@ -48,7 +48,7 @@ renderList = (coinList = {}) => {
   }
 
   addOnClick()
-  startTrackers()
+  startAlarms()
 }
 
 generateLi = (Id, item) => {
@@ -104,16 +104,19 @@ saveToGlobal = (data) => {
   trackers = data || {}
 }
 
-startTrackers = () => {
+startAlarms = () => {
   chrome.alarms.clearAll()
+
   chrome.storage.local.get(["trackers"], ({ trackers }) => {
-    let trackersArray = Object.values(trackers)
-    trackersArray.forEach((tracker) => {
-      chrome.alarms.create(JSON.stringify(tracker), {
-        periodInMinutes: parseInt(tracker.timer),
-        delayInMinutes: 1,
+    if (trackers) {
+      let trackersArray = Object.values(trackers || {})
+      trackersArray.forEach((tracker) => {
+        chrome.alarms.create(JSON.stringify(tracker), {
+          periodInMinutes: parseInt(tracker.timer),
+          delayInMinutes: 1,
+        })
       })
-    })
+    }
   })
 }
 
